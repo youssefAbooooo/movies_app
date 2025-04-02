@@ -36,14 +36,17 @@ class CategorySection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 280,
-          child: ListView.builder(
-            itemCount: 4,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return MovieCard();
-            },
+        Padding(
+          padding: const EdgeInsets.only(left: 4),
+          child: SizedBox(
+            height: 280,
+            child: ListView.builder(
+              itemCount: 4,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return MovieCard();
+              },
+            ),
           ),
         ),
       ],
