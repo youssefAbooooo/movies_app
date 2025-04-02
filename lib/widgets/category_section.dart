@@ -11,10 +11,11 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -22,6 +23,7 @@ class CategorySection extends StatelessWidget {
                 'Movies',
                 style: TextStyle(
                   fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text(

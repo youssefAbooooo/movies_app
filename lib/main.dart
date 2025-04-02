@@ -23,8 +23,8 @@ class MoviesApp extends StatelessWidget {
       },
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.background,
-        ),
+            backgroundColor: AppColors.background,
+            foregroundColor: AppColors.textPrimary),
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.background,
         textTheme: TextTheme(

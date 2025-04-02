@@ -13,7 +13,7 @@ class MovieCard extends StatelessWidget {
         // Navigator.pushNamed(context, "/details", arguments: movie);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4),
+        margin: EdgeInsets.only(left: 8),
         decoration: BoxDecoration(
           color: AppColors.card,
           borderRadius: BorderRadius.circular(8),
