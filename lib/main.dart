@@ -22,6 +22,9 @@ class MoviesApp extends StatelessWidget {
         WatchlistScreen.id: (context) => WatchlistScreen(),
       },
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.background,
+        ),
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.background,
         textTheme: TextTheme(

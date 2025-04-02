@@ -13,6 +13,7 @@ class MovieCard extends StatelessWidget {
         // Navigator.pushNamed(context, "/details", arguments: movie);
       },
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
           color: AppColors.card,
           borderRadius: BorderRadius.circular(8),
@@ -62,17 +63,24 @@ class MovieCard extends StatelessWidget {
                         spacing: 4,
                         children: [
                           IMDbLogo(),
-                          Text('8.4'),
+                          Text(
+                            '8.4',
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ],
                       ),
                       Row(
                         spacing: 4,
                         children: [
                           Icon(
+                            size: 20,
                             Icons.schedule,
                             color: AppColors.details,
                           ),
-                          Text('3h 5m'),
+                          Text(
+                            '3h 5m',
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ],
                       )
                     ],

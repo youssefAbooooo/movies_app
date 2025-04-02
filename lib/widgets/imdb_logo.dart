@@ -19,7 +19,7 @@ class IMDbLogo extends StatelessWidget {
         'IMDb',
         style: TextStyle(
           color: AppColors.background,
-          fontSize: 10,
+          fontSize: 8,
           fontWeight: FontWeight.bold,
         ),
       ),
