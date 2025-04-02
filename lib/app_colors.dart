@@ -7,7 +7,7 @@ class AppColors {
   // static const Color primaryDark = Color(0xFF1A73E8);
 
   // Secondary/accent colors
-  static const Color accent = Color(0xFF1EB7E8);
+  static const Color secondary = Color(0xFF1EB7E8);
 
   // Neutral colors
   static const Color background = Color(0xFF303030);
@@ -15,7 +15,7 @@ class AppColors {
   // static const Color error = Color(0xFFB00020);
 
   // Text colors
-  // static const Color textPrimary = Color(0xFF202124);
+  static const Color textPrimary = Color(0xFFFFFFFF);
   // static const Color textSecondary = Color(0xFF5F6368);
   // static const Color textHint = Color(0xFF9AA0A6);
 
