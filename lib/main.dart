@@ -14,10 +14,11 @@ class MoviesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // initialRoute: HomeScreen.id,
       routes: {
-        'HomeScreen': (context) => HomeScreen(),
-        'MovieDetailScreen': (context) => MovieDetailScreen(),
-        'WatchlistScreen': (context) => WatchlistScreen(),
+        HomeScreen.id: (context) => HomeScreen(),
+        MovieDetailScreen.id: (context) => MovieDetailScreen(),
+        WatchlistScreen.id: (context) => WatchlistScreen(),
       },
     );
   }
