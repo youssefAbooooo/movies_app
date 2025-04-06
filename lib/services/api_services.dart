@@ -28,4 +28,26 @@ class ApiServices {
       throw Exception(e);
     }
   }
+
+  searchForMovie(String movieName) async {
+    try {
+      Response response = await dio
+          .get('$baseUrl/search/movie?api_key=$apiKey&query=$movieName');
+
+      Map<String, dynamic> jsonData = response.data;
+
+      List<dynamic> movies = jsonData['results'];
+
+      List<Movie> moviesList = [];
+
+      for (var movie in movies) {
+        moviesList.add(Movie.fromJson(movie));
+      }
+      return moviesList;
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
