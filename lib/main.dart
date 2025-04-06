@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/services/api_services.dart';
 
 import 'views/home_screen.dart';
 import 'views/movie_detail_screen.dart';
 import 'views/watchlist_screen.dart';
 
 void main() {
+  ApiServices().getPopularMovies();
   runApp(const MoviesApp());
 }
 
@@ -23,8 +25,9 @@ class MoviesApp extends StatelessWidget {
       },
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-            backgroundColor: AppColors.background,
-            foregroundColor: AppColors.textPrimary),
+          backgroundColor: AppColors.background,
+          foregroundColor: AppColors.textPrimary,
+        ),
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.background,
         textTheme: TextTheme(
