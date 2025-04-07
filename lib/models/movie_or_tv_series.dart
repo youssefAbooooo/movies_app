@@ -1,4 +1,4 @@
-class Movie {
+class MovieOrTvSeries {
   final int id;
   final String language;
   final String title;
@@ -10,7 +10,7 @@ class Movie {
   final num voteAvr;
   final num voteCount;
 
-  Movie(
+  MovieOrTvSeries(
       {required this.id,
       required this.language,
       required this.title,
@@ -22,8 +22,8 @@ class Movie {
       required this.voteAvr,
       required this.voteCount});
 
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
+  factory MovieOrTvSeries.fromJson(Map<String, dynamic> json) {
+    return MovieOrTvSeries(
       id: json['id'],
       language: json['original_language'],
       title: json['title'],
