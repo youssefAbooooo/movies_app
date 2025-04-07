@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/models/movie.dart';
 
 import 'imdb_logo.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key});
+  const MovieCard({super.key, required this.movie});
+
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +26,11 @@ class MovieCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image.network("https://image.tmdb.org/t/p/w500${movie.posterPath}"),
-            // Text(movie.title, style: TextStyle(fontWeight: FontWeight.bold)),
-            // Text("⭐ ${movie.rating.toString()}")
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
-                  "https://image.tmdb.org/t/p/w500/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
+                  "https://image.tmdb.org/t/p/w500${movie.poster}",
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -48,7 +48,7 @@ class MovieCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Inception",
+                    movie.title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       overflow: TextOverflow.ellipsis,
@@ -64,7 +64,7 @@ class MovieCard extends StatelessWidget {
                         children: [
                           IMDbLogo(),
                           Text(
-                            '8.4',
+                            movie.voteAvr.toStringAsFixed(1),
                             style: TextStyle(fontSize: 12),
                           ),
                         ],
@@ -78,7 +78,7 @@ class MovieCard extends StatelessWidget {
                             color: AppColors.details,
                           ),
                           Text(
-                            '3h 5m',
+                            movie.releaseDate.substring(0, 4),
                             style: TextStyle(fontSize: 12),
                           ),
                         ],

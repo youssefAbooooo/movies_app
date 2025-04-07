@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 
 import 'views/home_screen.dart';
 import 'views/movie_detail_screen.dart';
 import 'views/watchlist_screen.dart';
 
 void main() {
-  runApp(const MoviesApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<GetMoviesCubit>(
+          create: (context) => GetMoviesCubit(),
+        ),
+      ],
+      child: const MoviesApp(),
+    ),
+  );
 }
 
 class MoviesApp extends StatelessWidget {

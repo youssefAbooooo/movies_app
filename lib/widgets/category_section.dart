@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/movie.dart';
 
 import '../app_colors.dart';
 import 'movie_card.dart';
@@ -6,7 +7,12 @@ import 'movie_card.dart';
 class CategorySection extends StatelessWidget {
   const CategorySection({
     super.key,
+    required this.title,
+    required this.movies,
   });
+
+  final String title;
+  final List<Movie> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class CategorySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Movies',
+                title,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -41,10 +47,10 @@ class CategorySection extends StatelessWidget {
           child: SizedBox(
             height: 280,
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: movies.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return MovieCard();
+                return MovieCard(movie: movies[index]);
               },
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:movies_app/models/movie_or_tv_series.dart';
+import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/models/tv_series.dart';
 
 class ApiServices {
   final dio = Dio();
@@ -7,7 +8,7 @@ class ApiServices {
   final String baseUrl = 'https://api.themoviedb.org/3';
   final String apiKey = '89d29d819af376ca1df5e06d6e7e3751';
 
-  Future<List<MovieOrTvSeries>> getMoviesWithCategory(String category) async {
+  Future<List<Movie>> getMoviesWithCategory(String category) async {
     //? categories are now_playing , popular , top_rated , upcoming
     try {
       Response response =
@@ -17,10 +18,10 @@ class ApiServices {
 
       List<dynamic> movies = jsonData['results'];
 
-      List<MovieOrTvSeries> moviesList = [];
+      List<Movie> moviesList = [];
 
       for (var movie in movies) {
-        moviesList.add(MovieOrTvSeries.fromJson(movie));
+        moviesList.add(Movie.fromJson(movie));
       }
       return moviesList;
     } on DioException catch (e) {
@@ -30,7 +31,7 @@ class ApiServices {
     }
   }
 
-  Future<List<MovieOrTvSeries>> getTvSeriesWithCategory(String category) async {
+  Future<List<TvSeries>> getTvSeriesWithCategory(String category) async {
     //? categories are airing_today , on_the_air , popular , top_rated
     try {
       Response response =
@@ -40,10 +41,10 @@ class ApiServices {
 
       List<dynamic> tvSeries = jsonData['results'];
 
-      List<MovieOrTvSeries> tvSeriesList = [];
+      List<TvSeries> tvSeriesList = [];
 
       for (var oneTvSeries in tvSeries) {
-        tvSeriesList.add(MovieOrTvSeries.fromJson(oneTvSeries));
+        tvSeriesList.add(TvSeries.fromJson(oneTvSeries));
       }
       return tvSeriesList;
     } on DioException catch (e) {
@@ -53,7 +54,7 @@ class ApiServices {
     }
   }
 
-  Future<List<MovieOrTvSeries>> searchForMovie(String movieName) async {
+  Future<List<Movie>> searchForMovie(String movieName) async {
     try {
       Response response = await dio
           .get('$baseUrl/search/movie?api_key=$apiKey&query=$movieName');
@@ -62,10 +63,10 @@ class ApiServices {
 
       List<dynamic> movies = jsonData['results'];
 
-      List<MovieOrTvSeries> moviesList = [];
+      List<Movie> moviesList = [];
 
       for (var movie in movies) {
-        moviesList.add(MovieOrTvSeries.fromJson(movie));
+        moviesList.add(Movie.fromJson(movie));
       }
       return moviesList;
     } on DioException catch (e) {
