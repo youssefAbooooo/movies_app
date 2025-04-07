@@ -26,12 +26,12 @@ class TvSeries {
     return TvSeries(
       id: json['id'],
       language: json['original_language'],
-      title: json['title'],
-      originalTitle: json['original_title'],
+      title: json['name'],
+      originalTitle: json['original_name'],
       overView: json['overview'],
       popularity: json['popularity'],
       poster: json['poster_path'],
-      releaseDate: json['release_date'],
+      releaseDate: json['first_air_date'],
       voteAvr: json['vote_average'],
       voteCount: json['vote_count'],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
+import 'package:movies_app/cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
 
 import 'views/home_screen.dart';
 import 'views/movie_detail_screen.dart';
@@ -13,6 +14,9 @@ void main() {
       providers: [
         BlocProvider<GetMoviesCubit>(
           create: (context) => GetMoviesCubit(),
+        ),
+        BlocProvider<GetTvSeriesCubit>(
+          create: (context) => GetTvSeriesCubit(),
         ),
       ],
       child: const MoviesApp(),
