@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 import 'package:movies_app/widgets/tv_series_body.dart';
 
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
@@ -71,13 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
                 BlocBuilder<GetTvSeriesCubit, GetTvSeriesState>(
                   builder: (context, state) {
                     if (state is TvSeriesLoading) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(
+                              color: AppColors.details));
                     } else if (state is TvSeriesLoaded) {
                       return SingleChildScrollView(
                         child: TvSeriesBody(state: state),
