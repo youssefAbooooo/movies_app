@@ -81,8 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, state) {
                     if (state is TvSeriesLoading) {
                       return Center(
-                          child: CircularProgressIndicator(
-                              color: AppColors.details));
+                        child: CircularProgressIndicator(
+                          color: AppColors.details,
+                        ),
+                      );
                     } else if (state is TvSeriesLoaded) {
                       return SingleChildScrollView(
                         child: TvSeriesBody(state: state),
