@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/services/authenticaion_service.dart';
 
 import '../app_colors.dart';
 
@@ -30,14 +31,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leading: Container(
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: AppColors.card,
+      leading: GestureDetector(
+        onTap: AuthenticaionService().authenticate,
+        child: Container(
+          margin: EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: AppColors.card,
+          ),
+          child: Icon(Icons.menu),
         ),
-        child: Icon(Icons.menu),
       ),
       actions: [
         Container(
