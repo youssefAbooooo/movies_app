@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AuthenticaionService {
@@ -8,55 +11,20 @@ class AuthenticaionService {
   final String apiKey = '89d29d819af376ca1df5e06d6e7e3751';
 
   Future<Map<String, dynamic>> authenticate() async {
-    late String requestToken;
-    late String sessionId;
-    late Map<String, dynamic> accountDetails;
     try {
-      //? Step 1: create a request token
-      Response response = await dio.get(
-          'https://api.themoviedb.org/3/authentication/token/new?api_key=$apiKey');
+      // Step 1: create a request token
+      final String requestToken = await createRequestToken();
 
-      if (response.statusCode == 200) {
-        Map<String, dynamic> jsonData = response.data;
-        requestToken = jsonData['request_token'];
-      } else {
-        throw Exception('Failed to create request token');
-      }
+      // Step 2: User authorization (redirect to TMDB website)
+      authorizeUser(requestToken);
 
-      //? Step 2: User authorization (redirect to TMDB website)
-      final url =
-          Uri.parse('https://www.themoviedb.org/authenticate/$requestToken');
-      if (await canLaunchUrl(url)) {
-        await launchUrl(
-          url,
-          mode: LaunchMode.externalApplication, // Opens in browser
-        );
-      }
+      // Step 3: Create session (call this after user returns)
+      final String sessionId = await createSession(requestToken);
 
-      //? Step 3: Create session (call this after user returns)
-      final response1 = await dio.post(
-        'https://api.themoviedb.org/3/authentication/session/new?api_key=$apiKey',
-        data: {'request_token': requestToken},
-        options: Options(
-          headers: {'Content-Type': 'application/json'},
-        ),
-      );
-      if (response1.statusCode == 200) {
-        sessionId = response1.data['session_id'];
-      } else {
-        throw Exception('Failed to create session');
-      }
+      // Step 4: Get account details
+      final accountDetails = await getAccountDetails(sessionId);
 
-      //? Step 4: Get account details
-      final response2 = await dio
-          .get('$baseUrl/account?api_key=$apiKey&session_id=$sessionId');
-      if (response2.statusCode == 200) {
-        accountDetails = response2.data;
-      } else {
-        throw Exception('Failed to get account details');
-      }
-
-      //? returning account data
+      // returning account data
       return {
         'session_id': sessionId,
         'account_id': accountDetails['id'],
@@ -65,5 +33,51 @@ class AuthenticaionService {
     } catch (e) {
       throw Exception('Authentication Failed: $e');
     }
+  }
+
+  Future<String> createRequestToken() async {
+    Response response = await dio.get(
+        'https://api.themoviedb.org/3/authentication/token/new?api_key=$apiKey');
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonData = response.data;
+      log('request token is: ${jsonData['request_token']}');
+      debugPrint('request token is: ${jsonData['request_token']}');
+      return jsonData['request_token'];
+    } else {
+      throw Exception('Failed to create request token');
+    }
+  }
+
+  void authorizeUser(String requestToken) async {
+    final url = 'https://www.themoviedb.org/authenticate/$requestToken';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    }
+  }
+
+  Future<String> createSession(String requestToken) async {
+    final response = await dio.post(
+      'https://api.themoviedb.org/3/authentication/session/new?api_key=$apiKey',
+      data: {'request_token': requestToken},
+      options: Options(
+        headers: {'Content-Type': 'application/json'},
+      ),
+    );
+    if (response.statusCode == 200) {
+      return response.data['session_id'];
+    } else {
+      throw Exception('Failed to create session');
+    }
+  }
+
+  Future<Map<String, dynamic>> getAccountDetails(String sessionId) async {
+    final response =
+        await dio.get('$baseUrl/account?api_key=$apiKey&session_id=$sessionId');
+
+    if (response.statusCode == 200) {
+      return response.data;
+    }
+    throw Exception('Failed to get account details');
   }
 }

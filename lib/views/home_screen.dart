@@ -49,7 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocBuilder<GetMoviesCubit, GetMoviesState>(
                   builder: (context, state) {
                     if (state is MoviesLoading) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.details,
+                      ));
                     } else if (state is MoviesLoaded) {
                       return SingleChildScrollView(
                         child: MoviesBody(state: state),

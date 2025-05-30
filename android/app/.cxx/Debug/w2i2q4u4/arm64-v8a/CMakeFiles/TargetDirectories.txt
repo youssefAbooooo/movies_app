@@ -1,0 +1,2 @@
+E:/AndriodStudioProjects/movies_app/android/app/.cxx/Debug/w2i2q4u4/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/AndriodStudioProjects/movies_app/android/app/.cxx/Debug/w2i2q4u4/arm64-v8a/CMakeFiles/rebuild_cache.dir
