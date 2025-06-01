@@ -28,7 +28,7 @@ class _TMDBWebViewPageState extends State<TMDBWebViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebViewWidget(controller: _controller),
+      body: SafeArea(child: WebViewWidget(controller: _controller)),
     );
   }
 }
