@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/views/home_screen.dart';
 import 'package:movies_app/views/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: CircularProgressIndicator()),
+      body: Center(child: CircularProgressIndicator(color: AppColors.details)),
     );
   }
 }
