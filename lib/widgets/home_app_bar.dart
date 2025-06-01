@@ -30,17 +30,23 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leading: GestureDetector(
-        // onTap: AuthenticaionService().authenticate,
-        child: Container(
-          margin: EdgeInsets.all(8),
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: AppColors.card,
-          ),
-          child: Icon(Icons.menu),
-        ),
+      leading: Builder(
+        builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+            child: Container(
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: AppColors.card,
+              ),
+              child: Icon(Icons.menu),
+            ),
+          );
+        },
       ),
       actions: [
         Container(

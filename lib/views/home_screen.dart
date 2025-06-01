@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
+import 'package:movies_app/widgets/home_app_drawer.dart';
 import 'package:movies_app/widgets/tv_series_body.dart';
 
 import '../cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          drawer: HomeAppDrawer(),
           appBar: HomeAppBar(),
           body: SingleChildScrollView(
             child: Column(
