@@ -1,6 +1,7 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TMDBAuthService {
   final String apiKey = '89d29d819af376ca1df5e06d6e7e3751'; // 🔑 Replace this
@@ -30,6 +31,41 @@ class TMDBAuthService {
     } catch (e) {
       log('Error creating session ID: $e');
       return null;
+    }
+  }
+
+  Future<void> storeAccountDetails(String? sessionId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (sessionId == null) {
+      throw Exception('Session ID not found. User might not be logged in.');
+    }
+
+    try {
+      final response = await dio.get(
+        'https://api.themoviedb.org/3/account',
+        queryParameters: {
+          'api_key': apiKey,
+          'session_id': sessionId,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data;
+        final accountId = data['id'];
+        final username = data['username'];
+
+        // Store in SharedPreferences
+        await prefs.setInt('account_id', accountId);
+        await prefs.setString('username', username);
+
+        log('Account details saved: $username (ID: $accountId)');
+      } else {
+        throw Exception(
+            'Failed to fetch account details. Status: ${response.statusCode}');
+      }
+    } on DioException catch (e) {
+      throw Exception('Dio error: ${e.message}');
     }
   }
 }

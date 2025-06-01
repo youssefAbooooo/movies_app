@@ -28,7 +28,6 @@ class _TMDBWebViewPageState extends State<TMDBWebViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Approve TMDB Login")),
       body: WebViewWidget(controller: _controller),
     );
   }

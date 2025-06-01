@@ -4,6 +4,7 @@ import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 import 'package:movies_app/cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
 import 'package:movies_app/views/login_screen.dart';
+import 'package:movies_app/views/splash_screen.dart';
 
 import 'views/home_screen.dart';
 import 'views/movie_detail_screen.dart';
@@ -32,6 +33,7 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        SplashScreen.id: (context) => SplashScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         HomeScreen.id: (context) => HomeScreen(),
         MovieDetailScreen.id: (context) => MovieDetailScreen(),
