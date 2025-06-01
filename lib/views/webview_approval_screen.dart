@@ -4,7 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class TMDBWebViewPage extends StatefulWidget {
   final String requestToken;
 
-  const TMDBWebViewPage({required this.requestToken});
+  const TMDBWebViewPage({super.key, required this.requestToken});
 
   @override
   State<TMDBWebViewPage> createState() => _TMDBWebViewPageState();

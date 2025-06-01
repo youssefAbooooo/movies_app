@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         requestToken = token;
       });
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (_) => TMDBWebViewPage(requestToken: token),

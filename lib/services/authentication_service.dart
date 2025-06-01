@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+
 import 'package:dio/dio.dart';
 
 class TMDBAuthService {
@@ -12,7 +14,7 @@ class TMDBAuthService {
       );
       return response.data['request_token'];
     } catch (e) {
-      print('Error getting request token: $e');
+      log('Error getting request token: $e');
       return null;
     }
   }
@@ -26,7 +28,7 @@ class TMDBAuthService {
       );
       return response.data['session_id'];
     } catch (e) {
-      print('Error creating session ID: $e');
+      log('Error creating session ID: $e');
       return null;
     }
   }
