@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:movies_app/models/account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TMDBAuthService {
@@ -68,19 +67,6 @@ class TMDBAuthService {
     } on DioException catch (e) {
       throw Exception('Dio error: ${e.message}');
     }
-  }
-
-  Future<Account> getAccountDetails() async {
-    final prefs = await SharedPreferences.getInstance();
-    late Account account;
-    if (prefs.getInt('account_id') != null &&
-        prefs.getString('username') != null) {
-      account = Account(
-        id: prefs.getInt('account_id')!,
-        username: prefs.getString('username')!,
-      );
-    }
-    return account;
   }
 
   Future<void> logout() async {
