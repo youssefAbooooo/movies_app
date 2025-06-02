@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/cubits/get_account_data/get_account_data_cubit.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 import 'package:movies_app/cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
 import 'package:movies_app/simple_bloc_observer.dart';
@@ -18,6 +19,9 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider<GetAccountDataCubit>(
+          create: (context) => GetAccountDataCubit(),
+        ),
         BlocProvider<GetMoviesCubit>(
           create: (context) => GetMoviesCubit(),
         ),

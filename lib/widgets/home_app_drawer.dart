@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/get_account_data/get_account_data_cubit.dart';
 import 'package:movies_app/services/authentication_service.dart';
 import 'package:movies_app/views/splash_screen.dart';
 
@@ -14,9 +16,25 @@ class HomeAppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero, // Remove default padding at the top
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text('Youssef'),
-            accountEmail: Text('youssefabdelfatah258@gmail.com'),
+          BlocBuilder<GetAccountDataCubit, GetAccountDataState>(
+            builder: (context, state) {
+              if (state is GetAccountDataSuccess) {
+                return UserAccountsDrawerHeader(
+                  accountName: Text(state.userName),
+                  accountEmail: Text(state.sessionId),
+                );
+              } else if (state is GetAccountDataFailed) {
+                return UserAccountsDrawerHeader(
+                  accountName: Text('Error'),
+                  accountEmail: Text(state.error),
+                );
+              } else {
+                return UserAccountsDrawerHeader(
+                  accountName: Text('loading...'),
+                  accountEmail: Text('loading...'),
+                );
+              }
+            },
           ),
           ListTile(
             leading: Icon(Icons.home),
