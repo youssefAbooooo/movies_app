@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/cubits/get_account_data/get_account_data_cubit.dart';
 import 'package:movies_app/services/authentication_service.dart';
+import 'package:movies_app/services/get_account_datails_service.dart';
 import 'package:movies_app/views/splash_screen.dart';
 
 class HomeAppDrawer extends StatelessWidget {
@@ -12,29 +11,15 @@ class HomeAppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TMDBAuthService authService = TMDBAuthService();
+    final String username =
+        GetAccountDetailsService().getUsername() ?? 'username';
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero, // Remove default padding at the top
         children: <Widget>[
-          BlocBuilder<GetAccountDataCubit, GetAccountDataState>(
-            builder: (context, state) {
-              if (state is GetAccountDataSuccess) {
-                return UserAccountsDrawerHeader(
-                  accountName: Text(state.userName),
-                  accountEmail: Text(state.sessionId),
-                );
-              } else if (state is GetAccountDataFailed) {
-                return UserAccountsDrawerHeader(
-                  accountName: Text('Error'),
-                  accountEmail: Text(state.error),
-                );
-              } else {
-                return UserAccountsDrawerHeader(
-                  accountName: Text('loading...'),
-                  accountEmail: Text('loading...'),
-                );
-              }
-            },
+          UserAccountsDrawerHeader(
+            accountName: Text(username),
+            accountEmail: Text(username),
           ),
           ListTile(
             leading: Icon(Icons.home),

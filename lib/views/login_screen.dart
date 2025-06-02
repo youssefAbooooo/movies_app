@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/app_colors.dart';
-import 'package:movies_app/cubits/get_account_data/get_account_data_cubit.dart';
 import 'package:movies_app/cubits/login_cubit/login_cubit.dart';
 import 'package:movies_app/views/home_screen.dart';
 import 'package:movies_app/views/webview_approval_screen.dart';
@@ -28,8 +27,6 @@ class LoginScreen extends StatelessWidget {
               ),
             );
           } else if (state is LoginSuccess) {
-            //getting the account data when logged in successfully
-            BlocProvider.of<GetAccountDataCubit>(context).getAccountData();
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
