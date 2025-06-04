@@ -14,26 +14,27 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> checkSession() async {
-    final String? sessionId = AccountDetailsService().getSessionId();
-
-    if (sessionId == null) {
-      Navigator.pushReplacementNamed(
-        // ignore: use_build_context_synchronously
-        context, LoginScreen.id,
-      );
-    } else {
-      Navigator.pushReplacementNamed(
-        // ignore: use_build_context_synchronously
-        context, HomeScreen.id,
-      );
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    checkSession();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkSession();
+    });
+  }
+
+  Future<void> checkSession() async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    final String? sessionId = AccountDetailsService().getSessionId();
+
+    if (!mounted) return;
+
+    if (sessionId == null) {
+      Navigator.pushReplacementNamed(context, LoginScreen.id);
+    } else {
+      Navigator.pushReplacementNamed(context, HomeScreen.id);
+    }
   }
 
   @override
