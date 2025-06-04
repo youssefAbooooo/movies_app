@@ -105,7 +105,10 @@ class MovieCard extends StatelessWidget {
               onTap: () {
                 onPlusTap();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Added to Watchlist")),
+                  SnackBar(
+                    content: Text("Added to Watchlist"),
+                    backgroundColor: AppColors.surface,
+                  ),
                 );
               },
               child: Container(

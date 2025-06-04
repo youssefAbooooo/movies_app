@@ -49,7 +49,11 @@ class TvSeriesCategory extends StatelessWidget {
               itemCount: tvSeries.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return TvSeriesCard(tvSeries: tvSeries[index]);
+                return TvSeriesCard(
+                  tvSeries: tvSeries[index],
+                  onCardTap: () {},
+                  onPlusTap: () {},
+                );
               },
             ),
           ),
