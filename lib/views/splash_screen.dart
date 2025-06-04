@@ -3,7 +3,6 @@ import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/views/home_screen.dart';
 import 'package:movies_app/views/login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
