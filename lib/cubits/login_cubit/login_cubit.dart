@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/services/authentication_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_state.dart';
 
@@ -29,9 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       final sessionId = await _authService.getSessionId(requestToken);
       if (sessionId != null) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('request_token', requestToken);
-        await prefs.setString('session_id', sessionId);
+        await AccountDetailsService().setSessionId(sessionId);
         await _authService.storeAccountDetails(sessionId);
 
         emit(LoginSuccess(sessionId));

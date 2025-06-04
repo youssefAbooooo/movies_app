@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/services/authentication_service.dart';
-import 'package:movies_app/services/get_account_datails_service.dart';
+import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/views/splash_screen.dart';
 
 class HomeAppDrawer extends StatelessWidget {
@@ -11,8 +11,7 @@ class HomeAppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TMDBAuthService authService = TMDBAuthService();
-    final String username =
-        GetAccountDetailsService().getUsername() ?? 'username';
+    final String username = AccountDetailsService().getUsername() ?? 'username';
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero, // Remove default padding at the top

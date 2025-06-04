@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     if (state is LoginLoading)
-                      const CircularProgressIndicator(color: AppColors.details)
+                      const CircularProgressIndicator(color: AppColors.primary)
                     else ...[
                       LoginButton(
                         onPressed: () {

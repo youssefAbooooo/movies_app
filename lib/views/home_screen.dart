@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state is MoviesLoading) {
                       return Center(
                           child: CircularProgressIndicator(
-                        color: AppColors.details,
+                        color: AppColors.primary,
                       ));
                     } else if (state is MoviesLoaded) {
                       return SingleChildScrollView(
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state is TvSeriesLoading) {
                       return Center(
                         child: CircularProgressIndicator(
-                          color: AppColors.details,
+                          color: AppColors.primary,
                         ),
                       );
                     } else if (state is TvSeriesLoaded) {

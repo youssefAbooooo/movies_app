@@ -35,7 +35,7 @@ class MovieCategory extends StatelessWidget {
               Text(
                 'See All',
                 style: TextStyle(
-                  color: AppColors.secondary,
+                  color: AppColors.primary,
                   fontSize: 18,
                 ),
               )

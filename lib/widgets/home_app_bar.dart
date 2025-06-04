@@ -14,7 +14,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Movies',
+            'TMDB',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,

@@ -13,7 +13,7 @@ class IMDbLogo extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 1),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(2),
-        color: AppColors.details,
+        color: AppColors.primary,
       ),
       child: Text(
         'IMDb',

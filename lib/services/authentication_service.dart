@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movies_app/services/account_datails_service.dart';
 
 class TMDBAuthService {
   final String apiKey = '89d29d819af376ca1df5e06d6e7e3751'; // 🔑 Replace this
@@ -35,8 +35,6 @@ class TMDBAuthService {
   }
 
   Future<void> storeAccountDetails(String? sessionId) async {
-    final prefs = await SharedPreferences.getInstance();
-
     if (sessionId == null) {
       throw Exception('Session ID not found. User might not be logged in.');
     }
@@ -56,8 +54,8 @@ class TMDBAuthService {
         final username = data['username'];
 
         // Store in SharedPreferences
-        await prefs.setInt('account_id', accountId);
-        await prefs.setString('username', username);
+        await AccountDetailsService().setAccountId(accountId);
+        await AccountDetailsService().setUsername(username);
 
         log('Account details saved: $username (ID: $accountId)');
       } else {
@@ -70,10 +68,6 @@ class TMDBAuthService {
   }
 
   Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('session_id');
-    await prefs.remove('account_id');
-    await prefs.remove('username');
-    // Or: await prefs.clear(); // to remove everything
+    await AccountDetailsService().clearAll();
   }
 }

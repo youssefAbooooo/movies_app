@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/app_colors.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key, this.onPressed, required this.text});
@@ -21,7 +22,7 @@ class LoginButton extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0XFF8ECEA2), Color(0XFF07B5E3)],
+            colors: [AppColors.tmdbSecondColor, AppColors.tmdbFirstColor],
           ),
           borderRadius: BorderRadius.circular(12),
         ),

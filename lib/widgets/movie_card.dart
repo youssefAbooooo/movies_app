@@ -75,7 +75,7 @@ class MovieCard extends StatelessWidget {
                           Icon(
                             size: 20,
                             Icons.schedule,
-                            color: AppColors.details,
+                            color: AppColors.primary,
                           ),
                           Text(
                             movie.releaseDate.substring(0, 4),

@@ -74,7 +74,7 @@ class TvSeriesCard extends StatelessWidget {
                           Icon(
                             size: 20,
                             Icons.schedule,
-                            color: AppColors.details,
+                            color: AppColors.primary,
                           ),
                           Text(
                             tvSeries.releaseDate.substring(0, 4),
