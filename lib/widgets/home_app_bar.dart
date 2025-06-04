@@ -41,7 +41,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
-                color: AppColors.card,
+                color: AppColors.surface,
               ),
               child: Icon(Icons.menu),
             ),
@@ -54,7 +54,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
-            color: AppColors.card,
+            color: AppColors.surface,
           ),
           child: Icon(Icons.search),
         ),

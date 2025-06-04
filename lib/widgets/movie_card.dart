@@ -18,7 +18,7 @@ class MovieCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(left: 8),
         decoration: BoxDecoration(
-          color: AppColors.card,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(8),
         ),
         width: 160,
