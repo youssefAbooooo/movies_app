@@ -12,7 +12,7 @@ import '../widgets/movies_body.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  static String id = '/homeScreen';
+  static const String id = '/homeScreen';
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

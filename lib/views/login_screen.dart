@@ -8,7 +8,7 @@ import 'package:movies_app/views/webview_approval_screen.dart';
 import 'package:movies_app/widgets/login_button.dart';
 
 class LoginScreen extends StatelessWidget {
-  static String id = '/loginScreen';
+  static const String id = '/loginScreen';
 
   const LoginScreen({super.key});
 

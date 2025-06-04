@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/app_router.dart';
 import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 import 'package:movies_app/cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
 import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/simple_bloc_observer.dart';
-import 'package:movies_app/views/login_screen.dart';
 import 'package:movies_app/views/splash_screen.dart';
-
-import 'views/home_screen.dart';
-import 'views/movie_detail_screen.dart';
-import 'views/watchlist_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,13 +36,8 @@ class MoviesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        SplashScreen.id: (context) => SplashScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        HomeScreen.id: (context) => HomeScreen(),
-        MovieDetailScreen.id: (context) => MovieDetailScreen(),
-        WatchlistScreen.id: (context) => WatchlistScreen(),
-      },
+      initialRoute: SplashScreen.id,
+      onGenerateRoute: AppRouter.generateRoute,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.background,

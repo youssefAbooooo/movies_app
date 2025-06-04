@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/views/movie_detail_screen.dart';
 
 import '../app_colors.dart';
 import 'movie_card.dart';
@@ -52,7 +53,13 @@ class MovieCategory extends StatelessWidget {
               itemBuilder: (context, index) {
                 return MovieCard(
                   movie: movies[index],
-                  onCardTap: () {},
+                  onCardTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      MovieDetailScreen.id,
+                      arguments: movies[index],
+                    );
+                  },
                   onPlusTap: () {},
                 );
               },
