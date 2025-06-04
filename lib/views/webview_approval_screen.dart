@@ -3,6 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class TMDBWebViewPage extends StatefulWidget {
   final String requestToken;
+  static const id = 'TMDB_web_view';
 
   const TMDBWebViewPage({super.key, required this.requestToken});
 

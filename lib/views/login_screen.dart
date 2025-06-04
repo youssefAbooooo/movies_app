@@ -27,11 +27,9 @@ class LoginScreen extends StatelessWidget {
               ),
             );
           } else if (state is LoginSuccess) {
-            Navigator.pushReplacement(
+            Navigator.pushReplacementNamed(
               context,
-              MaterialPageRoute(
-                builder: (_) => const HomeScreen(),
-              ),
+              HomeScreen.id,
             );
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
