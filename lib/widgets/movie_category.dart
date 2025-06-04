@@ -50,7 +50,11 @@ class MovieCategory extends StatelessWidget {
               itemCount: movies.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return MovieCard(movie: movies[index]);
+                return MovieCard(
+                  movie: movies[index],
+                  onCardTap: () {},
+                  onPlusTap: () {},
+                );
               },
             ),
           ),
