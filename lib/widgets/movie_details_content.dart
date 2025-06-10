@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
@@ -251,7 +249,8 @@ class MovieDetailsContent extends StatelessWidget {
 
                 const MovieDetailRow(label: 'IMDB ID', value: 'tt0416320'),
                 MovieDetailRow(
-                    label: 'Popularity', value: '${movie.popularity}'),
+                    label: 'Popularity',
+                    value: movie.popularity.toStringAsFixed(1)),
                 const MovieDetailRow(label: 'Adult Content', value: 'No'),
 
                 const SizedBox(height: 50), // Extra space at bottom
