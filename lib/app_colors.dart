@@ -24,6 +24,7 @@ class AppColors {
   //? static const Color details = Color(0XFF07B5E3);
   static const Color divider = Color(0xFF2C2C2C);
   // static const Color disabled = Color(0xFFE8EAED);
+  static const Color avatar = Color.fromARGB(255, 97, 97, 97);
 
   static const Color tmdbFirstColor = Color(0XFF07B5E3);
   static const Color tmdbSecondColor = Color(0XFF8ECEA2);

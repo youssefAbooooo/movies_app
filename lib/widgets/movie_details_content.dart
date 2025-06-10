@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
@@ -9,7 +11,38 @@ class MovieDetailsContent extends StatelessWidget {
     required this.movie,
   });
 
+  static const String id = '/detialsScreen';
+
   final Movie movie;
+
+  String _formateReleaseDate(String releaseDate) {
+    List<String> months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    String monthNumberString = releaseDate.substring(5, 7);
+    // log('MonthNumberString before trimming : $monthNumberString');
+    if (monthNumberString[0] == '0') {
+      //if the number starts with zero, remove the zero
+      monthNumberString = monthNumberString.substring(1);
+      // log('MonthNumberString after trimming : $monthNumberString');
+    }
+    int monthNumber = int.parse(monthNumberString);
+    String monthName = months[monthNumber - 1];
+    String year = releaseDate.substring(0, 4);
+    String day = releaseDate.substring(8, 10);
+    return '$monthName $day, $year';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +76,8 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Chris, a former tennis player, looks for work as an instructor. He meets Tom Hewett, a wealthy young man whose sister Chloe falls in love with Chris. But Chris has his eye on Tom\'s fiancee Nola.',
+                Text(
+                  movie.overView,
                   style: TextStyle(
                     color: AppColors.textPrimary,
                     fontSize: 16,
@@ -64,13 +97,16 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                const MovieDetailRow(
-                    label: 'Release Date', value: 'October 26, 2005'),
+                MovieDetailRow(
+                    label: 'Release Date',
+                    value: _formateReleaseDate(movie.releaseDate)),
                 const MovieDetailRow(label: 'Runtime', value: '2h 4m'),
                 const MovieDetailRow(
                     label: 'Genres', value: 'Drama, Thriller, Crime, Romance'),
-                const MovieDetailRow(
-                    label: 'Rating', value: '7.4/10 (4,154 votes)'),
+                MovieDetailRow(
+                    label: 'Rating',
+                    value:
+                        '${movie.voteAvr.toStringAsFixed(1)}/10 (${movie.voteCount} votes)'),
                 const MovieDetailRow(label: 'Status', value: 'Released'),
                 const MovieDetailRow(label: 'Language', value: 'EN'),
                 const MovieDetailRow(
@@ -168,14 +204,14 @@ class MovieDetailsContent extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 40,
-                              backgroundColor: Colors.grey[700],
+                              backgroundColor: AppColors.avatar,
                               child: Text(
                                 castNames[index]
                                     .split(' ')
                                     .map((name) => name[0])
                                     .join(''),
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.textPrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -214,7 +250,8 @@ class MovieDetailsContent extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 const MovieDetailRow(label: 'IMDB ID', value: 'tt0416320'),
-                const MovieDetailRow(label: 'Popularity', value: '3.3'),
+                MovieDetailRow(
+                    label: 'Popularity', value: '${movie.popularity}'),
                 const MovieDetailRow(label: 'Adult Content', value: 'No'),
 
                 const SizedBox(height: 50), // Extra space at bottom
