@@ -16,7 +16,7 @@ class AppColors {
 
   // Text colors
   static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFB0BEC5);
+  static const Color textSecondary = Color.fromARGB(255, 117, 117, 117);
   // static const Color textHint = Color(0xFF9AA0A6);
 
   // Other common colors

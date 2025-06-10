@@ -23,10 +23,10 @@ class AppRouter {
             builder: (_) => TMDBWebViewPage(requestToken: requestToken));
       case HomeScreen.id:
         return MaterialPageRoute(builder: (_) => HomeScreen());
-      case MovieDetailScreen.id:
+      case MovieDetailsScreen.id:
         final Movie movie = arguments as Movie;
         return MaterialPageRoute(
-            builder: (_) => MovieDetailScreen(movie: movie));
+            builder: (_) => MovieDetailsScreen(movie: movie));
       case WatchlistScreen.id:
         return MaterialPageRoute(builder: (_) => WatchlistScreen());
       default:

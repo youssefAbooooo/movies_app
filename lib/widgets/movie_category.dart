@@ -56,7 +56,7 @@ class MovieCategory extends StatelessWidget {
                   onCardTap: () {
                     Navigator.pushNamed(
                       context,
-                      MovieDetailScreen.id,
+                      MovieDetailsScreen.id,
                       arguments: movies[index],
                     );
                   },
