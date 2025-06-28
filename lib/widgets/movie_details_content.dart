@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/utils/movie_utils.dart';
 
 import 'package:movies_app/widgets/movie_detail_row.dart';
 
@@ -10,44 +11,7 @@ class MovieDetailsContent extends StatelessWidget {
     required this.movie,
   });
 
-  // static const String id = '/detialsScreen';
-
   final Movie movie;
-
-  String _formateReleaseDate(String releaseDate) {
-    List<String> months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
-    String monthNumberString = releaseDate.substring(5, 7);
-    // log('MonthNumberString before trimming : $monthNumberString');
-    if (monthNumberString[0] == '0') {
-      //if the number starts with zero, remove the zero
-      monthNumberString = monthNumberString.substring(1);
-      // log('MonthNumberString after trimming : $monthNumberString');
-    }
-    int monthNumber = int.parse(monthNumberString);
-    String monthName = months[monthNumber - 1];
-    String year = releaseDate.substring(0, 4);
-    String day = releaseDate.substring(8, 10);
-    return '$monthName $day, $year';
-  }
-
-  String _getGenres() {
-    print(movie.genres);
-    debugPrint(movie.genres.join(', '));
-    return movie.genres.join(', ');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,16 +69,18 @@ class MovieDetailsContent extends StatelessWidget {
                 MovieDetailRow(label: 'Movie ID', value: movie.id.toString()),
                 MovieDetailRow(
                     label: 'Release Date',
-                    value: _formateReleaseDate(movie.releaseDate)),
+                    value: MovieUtils.formateReleaseDate(movie.releaseDate)),
                 MovieDetailRow(
-                    label: 'Runtime', value: movie.runtime.toString()),
-                MovieDetailRow(label: 'Genres', value: _getGenres()),
+                    label: 'Runtime',
+                    value: MovieUtils.formatruntime(movie.runtime as int)),
+                MovieDetailRow(label: 'Genres', value: movie.genres.join(', ')),
                 MovieDetailRow(
                     label: 'Rating',
                     value:
-                        '${movie.voteAvr.toStringAsFixed(1)}/10 (${movie.voteCount} votes)'),
+                        '${movie.voteAvr.toStringAsFixed(1)}/10 (${MovieUtils.formatNumberWithCommas(movie.voteCount)} votes)'),
                 MovieDetailRow(label: 'Status', value: movie.status),
-                MovieDetailRow(label: 'Language', value: movie.language),
+                MovieDetailRow(
+                    label: 'Language', value: movie.language.toUpperCase()),
                 MovieDetailRow(
                     label: 'Countries',
                     value: movie.productionCountry.join(', ')),
@@ -133,9 +99,13 @@ class MovieDetailsContent extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 MovieDetailRow(
-                    label: 'Budget', value: '\$15.0M ${movie.budget}'),
+                  label: 'Budget',
+                  value: MovieUtils.formatBigNumbers(movie.budget as int),
+                ),
                 MovieDetailRow(
-                    label: 'Box Office', value: '\$85.3M ${movie.revenue}'),
+                  label: 'Box Office',
+                  value: MovieUtils.formatBigNumbers(movie.revenue as int),
+                ),
 
                 const SizedBox(height: 8),
                 const Text(
@@ -146,39 +116,13 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 4),
-                  child: Text(
-                    '• BBC Film (GB) ',
-                    style: TextStyle(
-                      color: AppColors.textPrimary,
-                      fontSize: 14,
-                    ),
+                ...movie.productionCompanies.map(
+                  (company) => Company(
+                    name: company.name,
+                    country: company.originalCountry,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 4),
-                  child: Text(
-                    '• Thema Production (LU)',
-                    style: TextStyle(
-                      color: AppColors.textPrimary,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16, bottom: 4),
-                  child: Text(
-                    '• Jada Productions (US)',
-                    style: TextStyle(
-                      color: AppColors.textPrimary,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-
                 const SizedBox(height: 24),
-
                 // Cast section
                 const Text(
                   'Cast',
@@ -262,13 +206,38 @@ class MovieDetailsContent extends StatelessWidget {
                     label: 'Popularity',
                     value: movie.popularity.toStringAsFixed(1)),
                 MovieDetailRow(
-                    label: 'Adult Content', value: movie.adult.toString()),
+                    label: 'Adult Content', value: movie.adult ? 'Yes' : 'No'),
 
                 const SizedBox(height: 50), // Extra space at bottom
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Company extends StatelessWidget {
+  const Company({
+    super.key,
+    required this.name,
+    required this.country,
+  });
+
+  final String name;
+  final String country;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 16, bottom: 4),
+      child: Text(
+        '• $name ($country)',
+        style: TextStyle(
+          color: AppColors.textPrimary,
+          fontSize: 14,
+        ),
       ),
     );
   }
