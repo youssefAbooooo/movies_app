@@ -65,8 +65,6 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                MovieDetailRow(label: 'Movie ID', value: movie.id.toString()),
                 MovieDetailRow(
                     label: 'Release Date',
                     value: MovieUtils.formateReleaseDate(movie.releaseDate)),
