@@ -9,7 +9,7 @@ class MovieDetailsContent extends StatelessWidget {
     required this.movie,
   });
 
-  static const String id = '/detialsScreen';
+  // static const String id = '/detialsScreen';
 
   final Movie movie;
 
