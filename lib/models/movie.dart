@@ -12,7 +12,7 @@ class Movie {
   //
   final bool adult;
   final num budget;
-  final List<Genre> genres;
+  final List<String> genres;
   final String imdbId;
   final List<String> originCountry;
   final List<ProductionCompany> productionCompanies;
@@ -62,7 +62,7 @@ class Movie {
       budget: json['budget'] ?? 0,
       //? there is an explaination about this part in the end of the file
       genres: (json['genres'] as List<dynamic>?)
-              ?.map((genrejson) => Genre.fromJson(genrejson))
+              ?.map((genrejson) => genrejson['name'].toString())
               .toList() ??
           [],
       imdbId: json['imdb_id'] ?? '',

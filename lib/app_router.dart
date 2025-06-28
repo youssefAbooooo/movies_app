@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/cubits/get_movie_details/movie_details_cubit.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/views/home_screen.dart';
 import 'package:movies_app/views/login_screen.dart';
@@ -26,7 +28,10 @@ class AppRouter {
       case MovieDetailsScreen.id:
         final Movie movie = arguments as Movie;
         return MaterialPageRoute(
-            builder: (_) => MovieDetailsScreen(movie: movie));
+            builder: (_) => BlocProvider(
+                  create: (context) => GetMovieDetailsCubit(),
+                  child: MovieDetailsScreen(movie: movie),
+                ));
       case WatchlistScreen.id:
         return MaterialPageRoute(builder: (_) => WatchlistScreen());
       default:

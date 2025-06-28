@@ -7,7 +7,7 @@ class AccountDetailsService {
       AccountDetailsService._internal();
   late SharedPreferences _prefs;
 
-  //Every time you write GetSessionIdService(), it returns the same instance (singleton behavior).
+  //Every time you write AccountDetailsService(), it returns the same instance (singleton behavior).
   factory AccountDetailsService() {
     return _instance;
   }

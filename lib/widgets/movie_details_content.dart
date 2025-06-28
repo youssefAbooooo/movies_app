@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
+
 import 'package:movies_app/widgets/movie_detail_row.dart';
 
 class MovieDetailsContent extends StatelessWidget {
@@ -42,6 +43,12 @@ class MovieDetailsContent extends StatelessWidget {
     return '$monthName $day, $year';
   }
 
+  String _getGenres() {
+    print(movie.genres);
+    debugPrint(movie.genres.join(', '));
+    return movie.genres.join(', ');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverList(
@@ -53,8 +60,8 @@ class MovieDetailsContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Tagline
-                const Text(
-                  '"There are no little secrets."',
+                Text(
+                  '"${movie.tagline}"',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 16,
@@ -95,21 +102,22 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
+                MovieDetailRow(label: 'Movie ID', value: movie.id.toString()),
                 MovieDetailRow(
                     label: 'Release Date',
                     value: _formateReleaseDate(movie.releaseDate)),
-                const MovieDetailRow(label: 'Runtime', value: '2h 4m'),
-                const MovieDetailRow(
-                    label: 'Genres', value: 'Drama, Thriller, Crime, Romance'),
+                MovieDetailRow(
+                    label: 'Runtime', value: movie.runtime.toString()),
+                MovieDetailRow(label: 'Genres', value: _getGenres()),
                 MovieDetailRow(
                     label: 'Rating',
                     value:
                         '${movie.voteAvr.toStringAsFixed(1)}/10 (${movie.voteCount} votes)'),
-                const MovieDetailRow(label: 'Status', value: 'Released'),
-                const MovieDetailRow(label: 'Language', value: 'EN'),
-                const MovieDetailRow(
+                MovieDetailRow(label: 'Status', value: movie.status),
+                MovieDetailRow(label: 'Language', value: movie.language),
+                MovieDetailRow(
                     label: 'Countries',
-                    value: 'United Kingdom, United States, Luxembourg'),
+                    value: movie.productionCountry.join(', ')),
 
                 const SizedBox(height: 24),
 
@@ -124,8 +132,10 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                const MovieDetailRow(label: 'Budget', value: '\$15.0M'),
-                const MovieDetailRow(label: 'Box Office', value: '\$85.3M'),
+                MovieDetailRow(
+                    label: 'Budget', value: '\$15.0M ${movie.budget}'),
+                MovieDetailRow(
+                    label: 'Box Office', value: '\$85.3M ${movie.revenue}'),
 
                 const SizedBox(height: 8),
                 const Text(
@@ -136,10 +146,10 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 16, bottom: 4),
                   child: Text(
-                    '• BBC Film (GB)',
+                    '• BBC Film (GB) ',
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 14,
@@ -247,11 +257,12 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                const MovieDetailRow(label: 'IMDB ID', value: 'tt0416320'),
+                MovieDetailRow(label: 'IMDB ID', value: movie.imdbId),
                 MovieDetailRow(
                     label: 'Popularity',
                     value: movie.popularity.toStringAsFixed(1)),
-                const MovieDetailRow(label: 'Adult Content', value: 'No'),
+                MovieDetailRow(
+                    label: 'Adult Content', value: movie.adult.toString()),
 
                 const SizedBox(height: 50), // Extra space at bottom
               ],
