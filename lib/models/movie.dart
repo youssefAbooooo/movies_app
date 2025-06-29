@@ -21,6 +21,7 @@ class Movie {
   final num runtime;
   final String status;
   final String tagline;
+  List<Actor> actors;
 
   Movie({
     required this.id,
@@ -44,6 +45,7 @@ class Movie {
     required this.runtime,
     required this.status,
     required this.tagline,
+    required this.actors,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -82,6 +84,24 @@ class Movie {
       runtime: json['runtime'] ?? 0,
       status: json['status'] ?? '',
       tagline: json['tagline'] ?? '',
+      actors: [],
+    );
+  }
+}
+
+class Actor {
+  final String name;
+  final String image;
+
+  Actor({
+    required this.image,
+    required this.name,
+  });
+
+  factory Actor.fromJson(Map<String, dynamic> json) {
+    return Actor(
+      image: json['profile_path'] ?? '',
+      name: json['name'] ?? '',
     );
   }
 }

@@ -10,6 +10,8 @@
 // STEP 1: UNDERSTANDING THE SINGLETON STRUCTURE
 // ============================================================================
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/tv_series.dart';
@@ -80,7 +82,28 @@ class ApiServices {
     try {
       Response response =
           await dio.get('$baseUrl/movie/$movieId?api_key=$apiKey');
-      return Movie.fromJson(response.data);
+      Movie movie = Movie.fromJson(response.data);
+      movie.actors = await getMovieActors(movieId);
+      return movie;
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Actor>> getMovieActors(int movieId) async {
+    try {
+      Response response =
+          await dio.get('$baseUrl/movie/$movieId/credits?api_key=$apiKey');
+      List<Actor> actors = [];
+      List<dynamic> jsonData = response.data['cast'];
+      for (var i = 0; i < jsonData.length; i++) {
+        actors.add(Actor.fromJson(jsonData[i]));
+        log(actors[i].name);
+      }
+
+      return actors;
     } on DioException catch (e) {
       throw Exception(e.error);
     } catch (e) {

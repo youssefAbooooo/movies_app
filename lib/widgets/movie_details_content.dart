@@ -135,17 +135,17 @@ class MovieDetailsContent extends StatelessWidget {
                   height: 140,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 6,
+                    itemCount: movie.actors.length,
                     itemBuilder: (context, index) {
-                      // Dummy cast names
-                      List<String> castNames = [
-                        'Jonathan Rhys Meyers',
-                        'Scarlett Johansson',
-                        'Emily Mortimer',
-                        'Matthew Goode',
-                        'Brian Cox',
-                        'Penelope Wilton'
-                      ];
+                      // // Dummy cast names
+                      // List<String> castNames = [
+                      //   'Jonathan Rhys Meyers',
+                      //   'Scarlett Johansson',
+                      //   'Emily Mortimer',
+                      //   'Matthew Goode',
+                      //   'Brian Cox',
+                      //   'Penelope Wilton'
+                      // ];
 
                       return Container(
                         margin: const EdgeInsets.only(right: 12),
@@ -155,21 +155,31 @@ class MovieDetailsContent extends StatelessWidget {
                             CircleAvatar(
                               radius: 40,
                               backgroundColor: AppColors.avatar,
-                              child: Text(
-                                castNames[index]
-                                    .split(' ')
-                                    .map((name) => name[0])
-                                    .join(''),
-                                style: const TextStyle(
-                                  color: AppColors.textPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
+                              child: movie.actors[index].image == ''
+                                  ? Text(
+                                      movie.actors[index].name
+                                          .split(' ')
+                                          .map((name) => name[0])
+                                          .join(''),
+                                      style: const TextStyle(
+                                        color: AppColors.textPrimary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius:
+                                          BorderRadiusGeometry.circular(40),
+                                      child: Image.network(
+                                        'https://image.tmdb.org/t/p/w500${movie.actors[index].image}',
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                      ),
+                                    ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              castNames[index],
+                              movie.actors[index].name,
                               style: const TextStyle(
                                 color: AppColors.textPrimary,
                                 fontSize: 12,

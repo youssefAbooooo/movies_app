@@ -28,10 +28,11 @@ class AppRouter {
       case MovieDetailsScreen.id:
         final Movie movie = arguments as Movie;
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => GetMovieDetailsCubit(),
-                  child: MovieDetailsScreen(movie: movie),
-                ));
+          builder: (_) => BlocProvider(
+            create: (context) => GetMovieDetailsCubit(),
+            child: MovieDetailsScreen(movie: movie),
+          ),
+        );
       case WatchlistScreen.id:
         return MaterialPageRoute(builder: (_) => WatchlistScreen());
       default:
