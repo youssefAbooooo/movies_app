@@ -7,6 +7,7 @@ import 'package:movies_app/views/login_screen.dart';
 import 'package:movies_app/views/movie_detail_screen.dart';
 import 'package:movies_app/views/page_not_found_screen.dart';
 import 'package:movies_app/views/splash_screen.dart';
+import 'package:movies_app/views/tv_series_detail_screen.dart';
 import 'package:movies_app/views/watchlist_screen.dart';
 import 'package:movies_app/views/webview_approval_screen.dart';
 
@@ -35,6 +36,8 @@ class AppRouter {
         );
       case WatchlistScreen.id:
         return MaterialPageRoute(builder: (_) => WatchlistScreen());
+      case TvSeriesDetailScreen.id:
+        return MaterialPageRoute(builder: (_) => TvSeriesDetailScreen());
       default:
         return MaterialPageRoute(builder: (_) => PageNotFoundScreen());
     }

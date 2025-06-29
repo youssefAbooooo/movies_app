@@ -83,7 +83,7 @@ class TvSeriesCard extends StatelessWidget {
                                 color: AppColors.primary,
                               ),
                               Text(
-                                tvSeries.releaseDate.substring(0, 4),
+                                tvSeries.firstAirDate.substring(0, 4),
                                 style: TextStyle(fontSize: 12),
                               ),
                             ],
