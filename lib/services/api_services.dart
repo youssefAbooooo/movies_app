@@ -100,10 +100,20 @@ class ApiServices {
       List<dynamic> jsonData = response.data['cast'];
       for (var i = 0; i < jsonData.length; i++) {
         actors.add(Actor.fromJson(jsonData[i]));
-        log(actors[i].name);
       }
-
       return actors;
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<TvSeries> getTvseriesDetails(int tvseriesId) async {
+    try {
+      Response response =
+          await dio.get('$baseUrl/tv/$tvseriesId?api_key=$apiKey');
+      return TvSeries.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception(e.error);
     } catch (e) {

@@ -24,14 +24,48 @@ class MovieDetailsContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Tagline
-                Text(
-                  '"${movie.tagline}"',
-                  style: TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 16,
-                    fontStyle: FontStyle.italic,
+                if (movie.tagline != '')
+                  Text(
+                    '"${movie.tagline}"',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      movie.voteAvr.toStringAsFixed(1),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Text(
+                      '/10 (${MovieUtils.formatNumberWithCommas(movie.voteCount)} votes)',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[400],
+                          ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Genres
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    ...movie.genres.map((genre) => _buildGenreChip(genre))
+                  ],
                 ),
                 const SizedBox(height: 16),
 
@@ -71,11 +105,6 @@ class MovieDetailsContent extends StatelessWidget {
                 MovieDetailRow(
                     label: 'Runtime',
                     value: MovieUtils.formatruntime(movie.runtime as int)),
-                MovieDetailRow(label: 'Genres', value: movie.genres.join(', ')),
-                MovieDetailRow(
-                    label: 'Rating',
-                    value:
-                        '${movie.voteAvr.toStringAsFixed(1)}/10 (${MovieUtils.formatNumberWithCommas(movie.voteCount)} votes)'),
                 MovieDetailRow(label: 'Status', value: movie.status),
                 MovieDetailRow(
                     label: 'Language', value: movie.language.toUpperCase()),
@@ -221,6 +250,24 @@ class MovieDetailsContent extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildGenreChip(String genre) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.grey[800],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        genre,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
-import 'package:movies_app/models/movie.dart';
 
-class MovieDetailsAppBar extends StatelessWidget {
-  const MovieDetailsAppBar({
+class DetailsScreenAppBar extends StatelessWidget {
+  const DetailsScreenAppBar({
     super.key,
-    required this.movie,
+    required this.title,
+    required this.poster,
   });
 
-  final Movie movie;
+  final String title;
+  final String poster;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class MovieDetailsAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(left: 64, bottom: 16),
         title: Text(
-          movie.title,
+          title,
           style: const TextStyle(
             shadows: [
               Shadow(
@@ -39,7 +40,7 @@ class MovieDetailsAppBar extends StatelessWidget {
             // Background poster (blurred)
             Positioned.fill(
               child: Image.network(
-                "https://image.tmdb.org/t/p/w500${movie.poster}",
+                "https://image.tmdb.org/t/p/w500$poster",
                 fit: BoxFit.cover,
               ),
             ),

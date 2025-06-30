@@ -16,7 +16,7 @@ class TvSeries {
   final List<String> genres;
   final bool inProduction;
   final List<String> languages;
-  final String nextEpisodeToAir;
+  final int nextEpisodeToAir;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originCountries;
@@ -84,7 +84,9 @@ class TvSeries {
               .toList() ??
           [],
       lastAirDate: json['last_air_date'] ?? '',
-      nextEpisodeToAir: json['next_episode_to_air'] ?? '',
+      nextEpisodeToAir: json['next_episode_to_air'] == null
+          ? 0
+          : (json['next_episode_to_air']['episode_number'] ?? 0),
       numberOfEpisodes: json['number_of_episodes'] ?? 0,
       numberOfSeasons: json['number_of_seasons'] ?? 0,
       originCountries: (json['origin_country'] as List<dynamic>?)

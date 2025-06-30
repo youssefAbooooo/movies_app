@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/get_movie_details/movie_details_cubit.dart';
+import 'package:movies_app/cubits/get_tvseries_details/get_tvseries_details_cubit.dart';
 import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/models/tv_series.dart';
 import 'package:movies_app/views/home_screen.dart';
 import 'package:movies_app/views/login_screen.dart';
 import 'package:movies_app/views/movie_detail_screen.dart';
@@ -37,7 +39,12 @@ class AppRouter {
       case WatchlistScreen.id:
         return MaterialPageRoute(builder: (_) => WatchlistScreen());
       case TvSeriesDetailScreen.id:
-        return MaterialPageRoute(builder: (_) => TvSeriesDetailScreen());
+        final TvSeries tvSeries = arguments as TvSeries;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetTvseriesDetailsCubit(),
+                  child: TvSeriesDetailScreen(tvSeries: tvSeries),
+                ));
       default:
         return MaterialPageRoute(builder: (_) => PageNotFoundScreen());
     }

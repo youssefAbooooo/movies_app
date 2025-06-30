@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_movie_details/movie_details_cubit.dart';
 import 'package:movies_app/models/movie.dart';
-import 'package:movies_app/widgets/movie_datails_app_bar.dart';
+import 'package:movies_app/widgets/datails_screen_app_bar.dart';
 import 'package:movies_app/widgets/movie_details_content.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
@@ -29,7 +29,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          MovieDetailsAppBar(movie: widget.movie),
+          DetailsScreenAppBar(
+            title: widget.movie.title,
+            poster: widget.movie.poster,
+          ),
           BlocBuilder<GetMovieDetailsCubit, GetMovieDetailsState>(
             builder: (context, state) {
               if (state is GetMovieDetailsLoaded) {

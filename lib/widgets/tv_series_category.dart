@@ -56,6 +56,7 @@ class TvSeriesCategory extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       TvSeriesDetailScreen.id,
+                      arguments: tvSeries[index],
                     );
                   },
                   onPlusTap: () {},
