@@ -29,6 +29,7 @@ class TvSeries {
   final String tagline;
   final String type;
   final List<String> networks;
+  List<Actor> actors;
 
   TvSeries({
     required this.id,
@@ -59,6 +60,7 @@ class TvSeries {
     required this.tagline,
     required this.type,
     required this.networks,
+    required this.actors,
   });
 
   factory TvSeries.fromJson(Map<String, dynamic> json) {
@@ -117,6 +119,7 @@ class TvSeries {
               ?.map((network) => network['name'].toString())
               .toList() ??
           [],
+      actors: [],
     );
   }
 }

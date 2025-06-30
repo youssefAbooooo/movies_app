@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
-import 'package:movies_app/utils/movie_utils.dart';
+import 'package:movies_app/utils/details_utils.dart';
 
-import 'package:movies_app/widgets/movie_detail_row.dart';
+import 'package:movies_app/widgets/detail_row.dart';
 
 class MovieDetailsContent extends StatelessWidget {
   const MovieDetailsContent({
@@ -51,7 +51,7 @@ class MovieDetailsContent extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '/10 (${MovieUtils.formatNumberWithCommas(movie.voteCount)} votes)',
+                      '/10 (${DetailsUtils.formatNumberWithCommas(movie.voteCount)} votes)',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.grey[400],
                           ),
@@ -88,7 +88,6 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-
                 // Additional movie details
                 const Text(
                   'Details',
@@ -99,16 +98,16 @@ class MovieDetailsContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                MovieDetailRow(
+                DetailRow(
                     label: 'Release Date',
-                    value: MovieUtils.formateReleaseDate(movie.releaseDate)),
-                MovieDetailRow(
+                    value: DetailsUtils.formateDate(movie.releaseDate)),
+                DetailRow(
                     label: 'Runtime',
-                    value: MovieUtils.formatruntime(movie.runtime as int)),
-                MovieDetailRow(label: 'Status', value: movie.status),
-                MovieDetailRow(
+                    value: DetailsUtils.formatruntime(movie.runtime as int)),
+                DetailRow(label: 'Status', value: movie.status),
+                DetailRow(
                     label: 'Language', value: movie.language.toUpperCase()),
-                MovieDetailRow(
+                DetailRow(
                     label: 'Countries',
                     value: movie.productionCountry.join(', ')),
 
@@ -125,13 +124,13 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                MovieDetailRow(
+                DetailRow(
                   label: 'Budget',
-                  value: MovieUtils.formatBigNumbers(movie.budget as int),
+                  value: DetailsUtils.formatBigNumbers(movie.budget as int),
                 ),
-                MovieDetailRow(
+                DetailRow(
                   label: 'Box Office',
-                  value: MovieUtils.formatBigNumbers(movie.revenue as int),
+                  value: DetailsUtils.formatBigNumbers(movie.revenue as int),
                 ),
 
                 const SizedBox(height: 8),
@@ -166,16 +165,6 @@ class MovieDetailsContent extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: movie.actors.length,
                     itemBuilder: (context, index) {
-                      // // Dummy cast names
-                      // List<String> castNames = [
-                      //   'Jonathan Rhys Meyers',
-                      //   'Scarlett Johansson',
-                      //   'Emily Mortimer',
-                      //   'Matthew Goode',
-                      //   'Brian Cox',
-                      //   'Penelope Wilton'
-                      // ];
-
                       return Container(
                         margin: const EdgeInsets.only(right: 12),
                         width: 90,
@@ -238,11 +227,11 @@ class MovieDetailsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                MovieDetailRow(label: 'IMDB ID', value: movie.imdbId),
-                MovieDetailRow(
+                DetailRow(label: 'IMDB ID', value: movie.imdbId),
+                DetailRow(
                     label: 'Popularity',
                     value: movie.popularity.toStringAsFixed(1)),
-                MovieDetailRow(
+                DetailRow(
                     label: 'Adult Content', value: movie.adult ? 'Yes' : 'No'),
 
                 const SizedBox(height: 50), // Extra space at bottom

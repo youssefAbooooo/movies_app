@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 
-class MovieDetailRow extends StatelessWidget {
-  const MovieDetailRow({
+class DetailRow extends StatelessWidget {
+  const DetailRow({
     super.key,
     required this.label,
     required this.value,

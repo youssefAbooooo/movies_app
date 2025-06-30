@@ -113,7 +113,26 @@ class ApiServices {
     try {
       Response response =
           await dio.get('$baseUrl/tv/$tvseriesId?api_key=$apiKey');
-      return TvSeries.fromJson(response.data);
+      TvSeries tvSeries = TvSeries.fromJson(response.data);
+      tvSeries.actors = await getTvseriesActors(tvseriesId);
+      return tvSeries;
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Actor>> getTvseriesActors(int tvseriesId) async {
+    try {
+      Response response = await dio
+          .get('$baseUrl/tv/$tvseriesId/aggregate_credits?api_key=$apiKey');
+      List<Actor> actors = [];
+      List<dynamic> jsonData = response.data['cast'];
+      for (var i = 0; i < jsonData.length; i++) {
+        actors.add(Actor.fromJson(jsonData[i]));
+      }
+      return actors;
     } on DioException catch (e) {
       throw Exception(e.error);
     } catch (e) {

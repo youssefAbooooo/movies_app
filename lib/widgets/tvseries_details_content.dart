@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/tv_series.dart';
+import 'package:movies_app/utils/details_utils.dart';
+import 'package:movies_app/widgets/detail_row.dart';
+import 'package:movies_app/widgets/movie_details_content.dart';
 
 class TvseriesDetailsContent extends StatelessWidget {
   const TvseriesDetailsContent({super.key, required this.tvSeries});
@@ -64,7 +67,7 @@ class TvseriesDetailsContent extends StatelessWidget {
                 border: Border.all(color: AppColors.primary.withOpacity(0.5)),
               ),
               child: Text(
-                '5 Seasons • 50 Episodes',
+                '${tvSeries.numberOfSeasons} Seasons • ${tvSeries.numberOfEpisodes} Episodes',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w500,
@@ -85,7 +88,6 @@ class TvseriesDetailsContent extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            //TODO Overview section
             const Text(
               'Overview',
               style: TextStyle(
@@ -103,9 +105,7 @@ class TvseriesDetailsContent extends StatelessWidget {
                 height: 1.5,
               ),
             ),
-
             const SizedBox(height: 24),
-
             // Series details
             Text(
               'Series Details',
@@ -114,16 +114,120 @@ class TvseriesDetailsContent extends StatelessWidget {
                     color: Colors.white,
                   ),
             ),
+            const SizedBox(height: 16),
+            DetailRow(label: 'Status', value: tvSeries.status),
+            DetailRow(
+                label: 'First Air Date',
+                value: DetailsUtils.formateDate(tvSeries.firstAirDate)),
+            DetailRow(
+                label: 'Last Air Date',
+                value: DetailsUtils.formateDate(tvSeries.lastAirDate)),
+            DetailRow(
+                label: 'Seasons', value: tvSeries.numberOfSeasons.toString()),
+            DetailRow(
+                label: 'Episodes', value: tvSeries.numberOfEpisodes.toString()),
+            DetailRow(label: 'Networks', value: tvSeries.networks.join(', ')),
+            DetailRow(
+                label: 'Languages',
+                value: DetailsUtils.getLanguageName(tvSeries.language)),
+            DetailRow(
+                label: 'Countries',
+                value: DetailsUtils.getCountryNames(tvSeries.originCountries)),
 
             const SizedBox(height: 24),
-
-            //TODO Cast section (placeholder)
-
+            const Text(
+              'Production',
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Production Companies:',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 8),
+            ...tvSeries.productioCompanies.map(
+              (company) => Company(
+                name: company.name,
+                country: company.originalCountry,
+              ),
+            ),
+            const SizedBox(height: 24),
+            // Cast section
+            const Text(
+              'Cast',
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 140,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: tvSeries.actors.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.only(right: 12),
+                    width: 90,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundColor: AppColors.avatar,
+                          child: tvSeries.actors[index].image == ''
+                              ? Text(
+                                  tvSeries.actors[index].name
+                                      .split(' ')
+                                      .map((name) => name[0])
+                                      .join(''),
+                                  style: const TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              : ClipRRect(
+                                  borderRadius:
+                                      BorderRadiusGeometry.circular(40),
+                                  child: Image.network(
+                                    'https://image.tmdb.org/t/p/w500${tvSeries.actors[index].image}',
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                  ),
+                                ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          tvSeries.actors[index].name,
+                          style: const TextStyle(
+                            color: AppColors.textPrimary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
             const SizedBox(height: 24),
 
             // Similar TV Shows section (placeholder)
             Text(
-              'Similar TV Shows',
+              'Seasons',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -133,12 +237,12 @@ class TvseriesDetailsContent extends StatelessWidget {
             const SizedBox(height: 16),
 
             SizedBox(
-              height: 180,
+              height: 210,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: tvSeries.seasons.length,
                 itemBuilder: (context, index) {
-                  return _buildSimilarShowCard();
+                  return _buildSeasonCard(tvSeries.seasons[index]);
                 },
               ),
             ),
@@ -168,7 +272,7 @@ class TvseriesDetailsContent extends StatelessWidget {
     );
   }
 
-  Widget _buildSimilarShowCard() {
+  Widget _buildSeasonCard(Season season) {
     return Container(
       width: 120,
       margin: const EdgeInsets.only(right: 12),
@@ -176,11 +280,11 @@ class TvseriesDetailsContent extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Container(
+            child: SizedBox(
               width: 120,
-              height: 140,
+              height: 170,
               child: Image.network(
-                'https://via.placeholder.com/120x140',
+                'https://image.tmdb.org/t/p/w500${season.poster}',
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -197,7 +301,7 @@ class TvseriesDetailsContent extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Similar Show Title',
+            season.name,
             style: TextStyle(
               color: Colors.white,
               fontSize: 12,
