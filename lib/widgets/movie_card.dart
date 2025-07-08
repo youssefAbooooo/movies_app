@@ -28,6 +28,7 @@ class MovieCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             width: 160,
+            height: 280,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

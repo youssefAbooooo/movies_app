@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
-import 'package:movies_app/cubits/get_tvseries_details/get_tvseries_details_cubit.dart';
+import 'package:movies_app/cubits/get_tvseries_details_cubit/get_tvseries_details_cubit.dart';
 import 'package:movies_app/models/tv_series.dart';
 import 'package:movies_app/widgets/datails_Screen_app_bar.dart';
 import 'package:movies_app/widgets/tvseries_details_content.dart';

@@ -138,6 +138,38 @@ class ApiServices {
     }
   }
 
+  Future<List<Movie>> getWatchlistMovies(
+      int accountId, String sessionId) async {
+    try {
+      Response response = await dio.get(
+          '$baseUrl/account/$accountId/watchlist/movies?api_key=$apiKey&session_id=$sessionId&sort_by=created_at.asc');
+      Map<String, dynamic> jsonData = response.data;
+      List<dynamic> movies = jsonData['results'];
+
+      return movies.map((movie) => Movie.fromJson(movie)).toList();
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<TvSeries>> getWatchlistTvseries(
+      int accountId, String sessionId) async {
+    try {
+      Response response = await dio.get(
+          '$baseUrl/account/$accountId/watchlist/tv?api_key=$apiKey&session_id=$sessionId&sort_by=created_at.asc');
+      Map<String, dynamic> jsonData = response.data;
+      List<dynamic> tvseries = jsonData['results'];
+
+      return tvseries.map((tvseries) => TvSeries.fromJson(tvseries)).toList();
+    } on DioException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<List<Movie>> searchForMovie(String movieName) async {
     try {
       Response response = await dio

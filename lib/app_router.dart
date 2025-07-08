@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/cubits/get_movie_details/movie_details_cubit.dart';
-import 'package:movies_app/cubits/get_tvseries_details/get_tvseries_details_cubit.dart';
+import 'package:movies_app/cubits/get_movie_details_cubit/movie_details_cubit.dart';
+import 'package:movies_app/cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
+import 'package:movies_app/cubits/get_tvseries_details_cubit/get_tvseries_details_cubit.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/tv_series.dart';
 import 'package:movies_app/views/home_screen.dart';
@@ -37,7 +38,11 @@ class AppRouter {
           ),
         );
       case WatchlistScreen.id:
-        return MaterialPageRoute(builder: (_) => WatchlistScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetMyWatchlistCubit(),
+                  child: WatchlistScreen(),
+                ));
       case TvSeriesDetailScreen.id:
         final TvSeries tvSeries = arguments as TvSeries;
         return MaterialPageRoute(

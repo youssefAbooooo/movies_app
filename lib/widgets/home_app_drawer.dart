@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/services/authentication_service.dart';
 import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/views/splash_screen.dart';
+import 'package:movies_app/views/watchlist_screen.dart';
 
 class HomeAppDrawer extends StatelessWidget {
   const HomeAppDrawer({
@@ -33,6 +34,19 @@ class HomeAppDrawer extends StatelessWidget {
             title: Text('Favorites'),
             onTap: () {
               Navigator.pop(context);
+              // Navigate to Favorites page
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.view_list_rounded),
+            title: Text('Watchlists'),
+            onTap: () {
+              debugPrint('username: ${AccountDetailsService().getUsername()}');
+              debugPrint(
+                  'accountId: ${AccountDetailsService().getAccountId()}');
+              debugPrint(
+                  'sessionId: ${AccountDetailsService().getSessionId()}');
+              Navigator.pushNamed(context, WatchlistScreen.id);
               // Navigate to Favorites page
             },
           ),
