@@ -10,8 +10,6 @@
 // STEP 1: UNDERSTANDING THE SINGLETON STRUCTURE
 // ============================================================================
 
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/tv_series.dart';

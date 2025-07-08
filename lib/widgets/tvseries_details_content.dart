@@ -62,9 +62,9 @@ class TvseriesDetailsContent extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.2),
+                color: AppColors.primaryLight,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.primary.withOpacity(0.5)),
+                border: Border.all(color: AppColors.primaryBorder),
               ),
               child: Text(
                 '${tvSeries.numberOfSeasons} Seasons • ${tvSeries.numberOfEpisodes} Episodes',
