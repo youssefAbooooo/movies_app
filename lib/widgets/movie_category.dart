@@ -60,7 +60,10 @@ class MovieCategory extends StatelessWidget {
                       arguments: movies[index],
                     );
                   },
-                  onPlusTap: () {},
+                  onWatchlistTap: () {},
+                  onAddToListTap: () {},
+                  onFavouriteTap: () {},
+                  onYourRatingTap: () {},
                 );
               },
             ),

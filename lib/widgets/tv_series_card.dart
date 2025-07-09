@@ -5,14 +5,21 @@ import '../app_colors.dart';
 import 'imdb_logo.dart';
 
 class TvSeriesCard extends StatelessWidget {
-  const TvSeriesCard(
-      {super.key,
-      required this.tvSeries,
-      required this.onCardTap,
-      required this.onPlusTap});
+  const TvSeriesCard({
+    super.key,
+    required this.tvSeries,
+    required this.onCardTap,
+    required this.onAddToListTap,
+    required this.onFavouriteTap,
+    required this.onWatchlistTap,
+    required this.onYourRatingTap,
+  });
   final TvSeries tvSeries;
   final VoidCallback onCardTap;
-  final VoidCallback onPlusTap;
+  final VoidCallback onAddToListTap;
+  final VoidCallback onFavouriteTap;
+  final VoidCallback onWatchlistTap;
+  final VoidCallback onYourRatingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -99,28 +106,97 @@ class TvSeriesCard extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: GestureDetector(
-              onTap: () {
-                onPlusTap();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Added to Watchlist"),
-                    backgroundColor: AppColors.surface,
-                  ),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black54,
-                  shape: BoxShape.circle,
-                ),
-                padding: const EdgeInsets.all(6),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black54,
+                shape: BoxShape.circle,
+              ),
+              padding: const EdgeInsets.all(6),
+              child: PopupMenuButton(
+                color: AppColors.surface,
                 child: const Icon(
-                  Icons
-                      .add, //if the movie is added to a watchlist make the icon : Icon.check
+                  Icons.more_vert,
                   color: Colors.white,
-                  size: 20,
+                  size: 24,
                 ),
+                onSelected: (String result) {
+                  switch (result) {
+                    case 'add_to_list':
+                      debugPrint('add_to_list');
+                      onAddToListTap();
+                      break;
+                    case 'favourite':
+                      debugPrint('favourite');
+                      onFavouriteTap();
+                      break;
+                    case 'watchlist':
+                      debugPrint('watchlist');
+                      onWatchlistTap();
+                      break;
+                    case 'rating':
+                      debugPrint('your_rating');
+                      onYourRatingTap();
+                      break;
+                    default:
+                  }
+                },
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'add_to_list',
+                    child: Row(
+                      children: [
+                        Icon(Icons.playlist_add, color: AppColors.primary),
+                        SizedBox(width: 8),
+                        Text(
+                          'Add to List',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'favourite',
+                    child: Row(
+                      children: [
+                        //Icons.favorite
+                        Icon(Icons.favorite_border, color: AppColors.primary),
+                        SizedBox(width: 8),
+                        Text(
+                          'Favourite',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'watchlist',
+                    child: Row(
+                      children: [
+                        //Icons.bookmark is the other icon
+                        Icon(Icons.bookmark_border_outlined,
+                            color: AppColors.primary),
+                        SizedBox(width: 8),
+                        Text(
+                          'Watchlist',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'rating',
+                    child: Row(
+                      children: [
+                        Icon(Icons.star, color: AppColors.primary),
+                        SizedBox(width: 8),
+                        Text(
+                          'Your Rating',
+                          style: TextStyle(color: AppColors.textPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

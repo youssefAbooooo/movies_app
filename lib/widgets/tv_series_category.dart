@@ -59,7 +59,10 @@ class TvSeriesCategory extends StatelessWidget {
                       arguments: tvSeries[index],
                     );
                   },
-                  onPlusTap: () {},
+                  onAddToListTap: () {},
+                  onFavouriteTap: () {},
+                  onWatchlistTap: () {},
+                  onYourRatingTap: () {},
                 );
               },
             ),

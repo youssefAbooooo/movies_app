@@ -104,7 +104,11 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                   arguments: state.movies[index],
                                 );
                               },
-                              onPlusTap: () {})
+                              onWatchlistTap: () {},
+                              onAddToListTap: () {},
+                              onFavouriteTap: () {},
+                              onYourRatingTap: () {},
+                            )
                           : TvSeriesCard(
                               tvSeries: state.tvseries[index],
                               onCardTap: () {
@@ -112,7 +116,11 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                     context, TvSeriesDetailScreen.id,
                                     arguments: state.tvseries[index]);
                               },
-                              onPlusTap: () {});
+                              onAddToListTap: () {},
+                              onFavouriteTap: () {},
+                              onWatchlistTap: () {},
+                              onYourRatingTap: () {},
+                            );
                     },
                   );
                 } else if (state is GetMyWatchlistError) {
