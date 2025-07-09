@@ -106,6 +106,67 @@ class TvseriesDetailsContent extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(38),
+                      color: AppColors.divider,
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: Icon(
+                      Icons.playlist_add,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(38),
+                      color: AppColors.divider,
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: Icon(
+                      //Icons.favorite
+                      Icons.favorite_outline,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(38),
+                      color: AppColors.divider,
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: Icon(
+                      //Icons.bookmark
+                      Icons.bookmark_border_outlined,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(38),
+                      color: AppColors.divider,
+                    ),
+                    padding: EdgeInsets.all(12),
+                    child: Icon(
+                      //Icons.star
+                      Icons.star_border,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             // Series details
             Text(
               'Series Details',

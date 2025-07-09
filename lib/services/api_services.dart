@@ -11,6 +11,7 @@
 // ============================================================================
 
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/tv_series.dart';
 
@@ -167,6 +168,24 @@ class ApiServices {
       throw Exception(e.error);
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<bool> addOrRemoveFromWatchlist(int mediaId, String mediaType,
+      int accountId, String sessionId, bool add) async {
+    try {
+      Response response = await dio.post(
+        '$baseUrl/account/$accountId/watchlist?api_key=$apiKey&session_id=$sessionId',
+        data: {
+          'media_type': mediaType, // 'movie' or 'tv'
+          'media_id': mediaId,
+          'watchlist': add, // true to add, false to remove
+        },
+      );
+      return response.statusCode == 200 || response.statusCode == 201;
+    } catch (e) {
+      debugPrint('Error adding to watchlist: $e');
+      return false;
     }
   }
 

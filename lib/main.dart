@@ -16,17 +16,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<GetMoviesCubit>(
-          create: (context) => GetMoviesCubit(),
-        ),
-        BlocProvider<GetTvSeriesCubit>(
-          create: (context) => GetTvSeriesCubit(),
-        ),
-      ],
-      child: const MoviesApp(),
-    ),
+    const MoviesApp(),
   );
 }
 

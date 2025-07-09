@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/cubits/get_movie_details_cubit/movie_details_cubit.dart';
+import 'package:movies_app/cubits/get_movies_cubit/get_movies_cubit.dart';
 import 'package:movies_app/cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
+import 'package:movies_app/cubits/get_tv_series_cubit/get_tv_series_cubit.dart';
 import 'package:movies_app/cubits/get_tvseries_details_cubit/get_tvseries_details_cubit.dart';
+import 'package:movies_app/cubits/watchlist_cubit/watchlist_cubit_cubit.dart';
 import 'package:movies_app/models/movie.dart';
 import 'package:movies_app/models/tv_series.dart';
 import 'package:movies_app/views/home_screen.dart';
@@ -28,7 +31,22 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => TMDBWebViewPage(requestToken: requestToken));
       case HomeScreen.id:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => GetMoviesCubit(),
+              ),
+              BlocProvider(
+                create: (context) => GetTvSeriesCubit(),
+              ),
+              BlocProvider(
+                create: (context) => WatchlistCubit(),
+              ),
+            ],
+            child: HomeScreen(),
+          ),
+        );
       case MovieDetailsScreen.id:
         final Movie movie = arguments as Movie;
         return MaterialPageRoute(

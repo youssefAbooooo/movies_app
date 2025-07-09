@@ -187,7 +187,7 @@ class TvSeriesCard extends StatelessWidget {
                     value: 'rating',
                     child: Row(
                       children: [
-                        Icon(Icons.star, color: AppColors.primary),
+                        Icon(Icons.star_border, color: AppColors.primary),
                         SizedBox(width: 8),
                         Text(
                           'Your Rating',
