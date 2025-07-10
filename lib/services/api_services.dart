@@ -189,13 +189,36 @@ class ApiServices {
     }
   }
 
-  Future<Map<String, bool>> getMovieAccountStates({
-    required int movieId,
-  }) async {
+  Future<Map<String, bool>> getMovieAccountStates(
+      {required int movieId, required String sessionId}) async {
     try {
       final response = await dio.get(
-        '$baseUrl/movie/$movieId/account_states',
-      );
+          '$baseUrl/movie/$movieId/account_states?api_key=$apiKey&session_id=$sessionId');
+
+      if (response.statusCode == 200) {
+        return {
+          'favorite': response.data['favorite'] ?? false,
+          'watchlist': response.data['watchlist'] ?? false,
+          'rated': response.data['rated'] !=
+              false, // rated can be false or a rating object
+        };
+      }
+    } catch (e) {
+      debugPrint('Error getting movie account states: $e');
+    }
+
+    return {
+      'favorite': false,
+      'watchlist': false,
+      'rated': false,
+    };
+  }
+
+  Future<Map<String, bool>> getTvAccountStates(
+      {required int tvId, required String sessionId}) async {
+    try {
+      final response = await dio.get(
+          '$baseUrl/tv/$tvId/account_states?api_key=$apiKey&session_id=$sessionId');
 
       if (response.statusCode == 200) {
         return {
