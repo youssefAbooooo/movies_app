@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/models/tv_series.dart';
 
 import '../app_colors.dart';
+import '../views/tv_series_detail_screen.dart';
 import 'imdb_logo.dart';
 
 class TvSeriesCard extends StatelessWidget {
   const TvSeriesCard({
     super.key,
     required this.tvSeries,
-    required this.onCardTap,
     required this.onAddToListTap,
     required this.onFavouriteTap,
     required this.onWatchlistTap,
     required this.onYourRatingTap,
   });
   final TvSeries tvSeries;
-  final VoidCallback onCardTap;
   final VoidCallback onAddToListTap;
   final VoidCallback onFavouriteTap;
   final VoidCallback onWatchlistTap;
@@ -24,7 +23,13 @@ class TvSeriesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onCardTap,
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          TvSeriesDetailScreen.id,
+          arguments: tvSeries,
+        );
+      },
       child: Stack(
         children: [
           Container(

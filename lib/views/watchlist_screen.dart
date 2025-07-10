@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
 import 'package:movies_app/services/account_datails_service.dart';
-import 'package:movies_app/views/tv_series_detail_screen.dart';
 import 'package:movies_app/widgets/tv_series_card.dart';
 
 import '../widgets/movie_card.dart';
-import 'movie_detail_screen.dart';
 
 class WatchlistScreen extends StatefulWidget {
   const WatchlistScreen({super.key});
@@ -97,13 +95,6 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                       return selectedIndex == 0
                           ? MovieCard(
                               movie: state.movies[index],
-                              onCardTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  MovieDetailsScreen.id,
-                                  arguments: state.movies[index],
-                                );
-                              },
                               onWatchlistTap: () {},
                               onAddToListTap: () {},
                               onFavouriteTap: () {},
@@ -111,11 +102,6 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                             )
                           : TvSeriesCard(
                               tvSeries: state.tvseries[index],
-                              onCardTap: () {
-                                Navigator.pushNamed(
-                                    context, TvSeriesDetailScreen.id,
-                                    arguments: state.tvseries[index]);
-                              },
                               onAddToListTap: () {},
                               onFavouriteTap: () {},
                               onWatchlistTap: () {},

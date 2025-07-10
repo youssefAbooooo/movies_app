@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/models/movie.dart';
 
+import '../views/movie_detail_screen.dart';
 import 'imdb_logo.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard(
       {super.key,
       required this.movie,
-      required this.onCardTap,
       required this.onWatchlistTap,
       required this.onAddToListTap,
       required this.onFavouriteTap,
       required this.onYourRatingTap});
 
   final Movie movie;
-  final VoidCallback onCardTap;
   final VoidCallback onAddToListTap;
   final VoidCallback onFavouriteTap;
   final VoidCallback onWatchlistTap;
@@ -24,7 +23,13 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onCardTap,
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          MovieDetailsScreen.id,
+          arguments: movie,
+        );
+      },
       child: Stack(
         children: [
           Container(

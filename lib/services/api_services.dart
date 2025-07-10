@@ -172,14 +172,14 @@ class ApiServices {
   }
 
   Future<bool> addOrRemoveFromWatchlist(int mediaId, String mediaType,
-      int accountId, String sessionId, bool add) async {
+      int accountId, String sessionId, bool inWatchlist) async {
     try {
       Response response = await dio.post(
         '$baseUrl/account/$accountId/watchlist?api_key=$apiKey&session_id=$sessionId',
         data: {
           'media_type': mediaType, // 'movie' or 'tv'
           'media_id': mediaId,
-          'watchlist': add, // true to add, false to remove
+          'watchlist': inWatchlist, // true to add, false to remove
         },
       );
       return response.statusCode == 200 || response.statusCode == 201;

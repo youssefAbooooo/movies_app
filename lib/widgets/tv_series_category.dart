@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/models/tv_series.dart';
-import 'package:movies_app/views/tv_series_detail_screen.dart';
 import 'package:movies_app/widgets/tv_series_card.dart';
 import '../app_colors.dart';
 
@@ -52,13 +51,6 @@ class TvSeriesCategory extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TvSeriesCard(
                   tvSeries: tvSeries[index],
-                  onCardTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      TvSeriesDetailScreen.id,
-                      arguments: tvSeries[index],
-                    );
-                  },
                   onAddToListTap: () {},
                   onFavouriteTap: () {},
                   onWatchlistTap: () {},
