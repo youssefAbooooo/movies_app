@@ -52,10 +52,6 @@ class MovieCategory extends StatelessWidget {
               itemBuilder: (context, index) {
                 return MovieCard(
                   movie: movies[index],
-                  onWatchlistTap: () {},
-                  onAddToListTap: () {},
-                  onFavouriteTap: () {},
-                  onYourRatingTap: () {},
                 );
               },
             ),

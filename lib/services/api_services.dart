@@ -189,6 +189,33 @@ class ApiServices {
     }
   }
 
+  Future<Map<String, bool>> getMovieAccountStates({
+    required int movieId,
+  }) async {
+    try {
+      final response = await dio.get(
+        '$baseUrl/movie/$movieId/account_states',
+      );
+
+      if (response.statusCode == 200) {
+        return {
+          'favorite': response.data['favorite'] ?? false,
+          'watchlist': response.data['watchlist'] ?? false,
+          'rated': response.data['rated'] !=
+              false, // rated can be false or a rating object
+        };
+      }
+    } catch (e) {
+      debugPrint('Error getting movie account states: $e');
+    }
+
+    return {
+      'favorite': false,
+      'watchlist': false,
+      'rated': false,
+    };
+  }
+
   Future<List<Movie>> searchForMovie(String movieName) async {
     try {
       Response response = await dio

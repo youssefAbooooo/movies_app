@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
+import 'package:movies_app/cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
+import 'package:movies_app/cubits/watchlist_cubit/watchlist_cubit_cubit.dart';
 import 'package:movies_app/models/movie.dart';
+import 'package:movies_app/services/account_datails_service.dart';
 
 import '../views/movie_detail_screen.dart';
 import 'imdb_logo.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard(
-      {super.key,
-      required this.movie,
-      required this.onWatchlistTap,
-      required this.onAddToListTap,
-      required this.onFavouriteTap,
-      required this.onYourRatingTap});
+  const MovieCard({
+    super.key,
+    required this.movie,
+  });
 
   final Movie movie;
-  final VoidCallback onAddToListTap;
-  final VoidCallback onFavouriteTap;
-  final VoidCallback onWatchlistTap;
-  final VoidCallback onYourRatingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -130,20 +127,24 @@ class MovieCard extends StatelessWidget {
                   switch (result) {
                     case 'add_to_list':
                       debugPrint('add_to_list');
-                      onAddToListTap();
+                      // onAddToListTap();
                       break;
+
                     case 'favourite':
                       debugPrint('favourite');
-                      onFavouriteTap();
+                      // onFavouriteTap();
                       break;
+
                     case 'watchlist':
                       debugPrint('watchlist');
-                      onWatchlistTap();
+                      onWatchlistTap(context);
                       break;
+
                     case 'rating':
                       debugPrint('your_rating');
-                      onYourRatingTap();
+                      // onYourRatingTap();
                       break;
+
                     default:
                   }
                 },
@@ -209,6 +210,22 @@ class MovieCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void onWatchlistTap(BuildContext context) {
+    // add the movie to Watchlist
+    BlocProvider.of<WatchlistCubit>(context).addOrRemoveFromWatchlist(
+      movie.id,
+      'movie',
+      AccountDetailsService().getAccountId()!,
+      AccountDetailsService().getSessionId()!,
+      true,
+    );
+    //refresh the Watchlist screen
+    BlocProvider.of<GetMyWatchlistCubit>(context).getWatchlist(
+      AccountDetailsService().getAccountId()!,
+      AccountDetailsService().getSessionId()!,
     );
   }
 }

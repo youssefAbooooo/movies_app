@@ -51,10 +51,6 @@ class TvSeriesCategory extends StatelessWidget {
               itemBuilder: (context, index) {
                 return TvSeriesCard(
                   tvSeries: tvSeries[index],
-                  onAddToListTap: () {},
-                  onFavouriteTap: () {},
-                  onWatchlistTap: () {},
-                  onYourRatingTap: () {},
                 );
               },
             ),

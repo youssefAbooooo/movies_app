@@ -9,16 +9,8 @@ class TvSeriesCard extends StatelessWidget {
   const TvSeriesCard({
     super.key,
     required this.tvSeries,
-    required this.onAddToListTap,
-    required this.onFavouriteTap,
-    required this.onWatchlistTap,
-    required this.onYourRatingTap,
   });
   final TvSeries tvSeries;
-  final VoidCallback onAddToListTap;
-  final VoidCallback onFavouriteTap;
-  final VoidCallback onWatchlistTap;
-  final VoidCallback onYourRatingTap;
 
   @override
   Widget build(BuildContext context) {
@@ -128,19 +120,19 @@ class TvSeriesCard extends StatelessWidget {
                   switch (result) {
                     case 'add_to_list':
                       debugPrint('add_to_list');
-                      onAddToListTap();
+                      // onAddToListTap();
                       break;
                     case 'favourite':
                       debugPrint('favourite');
-                      onFavouriteTap();
+                      // onFavouriteTap();
                       break;
                     case 'watchlist':
                       debugPrint('watchlist');
-                      onWatchlistTap();
+                      // onWatchlistTap();
                       break;
                     case 'rating':
                       debugPrint('your_rating');
-                      onYourRatingTap();
+                      // onYourRatingTap();
                       break;
                     default:
                   }

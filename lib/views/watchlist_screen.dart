@@ -95,17 +95,9 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                       return selectedIndex == 0
                           ? MovieCard(
                               movie: state.movies[index],
-                              onWatchlistTap: () {},
-                              onAddToListTap: () {},
-                              onFavouriteTap: () {},
-                              onYourRatingTap: () {},
                             )
                           : TvSeriesCard(
                               tvSeries: state.tvseries[index],
-                              onAddToListTap: () {},
-                              onFavouriteTap: () {},
-                              onWatchlistTap: () {},
-                              onYourRatingTap: () {},
                             );
                     },
                   );
