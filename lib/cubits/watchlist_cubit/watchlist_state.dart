@@ -1,4 +1,4 @@
-part of 'watchlist_cubit_cubit.dart';
+part of 'watchlist_cubit.dart';
 
 @immutable
 sealed class WatchlistCubitState {}

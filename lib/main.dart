@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/app_colors.dart';
 import 'package:movies_app/app_router.dart';
 import 'package:movies_app/cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
-import 'package:movies_app/cubits/watchlist_cubit/watchlist_cubit_cubit.dart';
+import 'package:movies_app/cubits/watchlist_cubit/watchlist_cubit.dart';
 import 'package:movies_app/services/account_datails_service.dart';
 import 'package:movies_app/simple_bloc_observer.dart';
 import 'package:movies_app/views/splash_screen.dart';

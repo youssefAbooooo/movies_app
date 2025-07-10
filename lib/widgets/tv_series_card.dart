@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/models/tv_series.dart';
 
 import '../app_colors.dart';
+import '../cubits/get_my_watchlist_cubit/get_my_watchlist_cubit.dart';
+import '../cubits/watchlist_cubit/watchlist_cubit.dart';
+import '../services/account_datails_service.dart';
 import '../views/tv_series_detail_screen.dart';
 import 'imdb_logo.dart';
 
@@ -128,7 +132,7 @@ class TvSeriesCard extends StatelessWidget {
                       break;
                     case 'watchlist':
                       debugPrint('watchlist');
-                      // onWatchlistTap();
+                      onWatchlistTap(context);
                       break;
                     case 'rating':
                       debugPrint('your_rating');
@@ -199,6 +203,22 @@ class TvSeriesCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void onWatchlistTap(BuildContext context) {
+    // add the movie to Watchlist
+    BlocProvider.of<WatchlistCubit>(context).addOrRemoveFromWatchlist(
+      tvSeries.id,
+      'tv',
+      AccountDetailsService().getAccountId()!,
+      AccountDetailsService().getSessionId()!,
+      true,
+    );
+    //refresh the Watchlist screen
+    BlocProvider.of<GetMyWatchlistCubit>(context).getWatchlist(
+      AccountDetailsService().getAccountId()!,
+      AccountDetailsService().getSessionId()!,
     );
   }
 }
